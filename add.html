@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>豆瓣一刻</title>
+	<!--
+	可以通过meta 标签去进行一个控制.
+never 绝不，没有这个Referer 的请求头.
+	-->
+	<meta name="referrer" content="never">
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./less/main.css">
+	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+	<script src="libs/angular.min.js"></script>
+	<script src="libs/angular-route.js"></script>
+	<!--配置路由模块.-->
+	<!--引入app.js-->
+	<script src="script/app.js"></script>
+	<style>
+		 	.imageActive{
+				display: none;
+			}
+	</style>
+</head>
+<body>
+	<div class="viewport" ng-app="app">
+		<!-- 侧边导航 -->
+		<div class="navs" ng-controller='navController' ng-class='{collapse:collapse,body:true,black:flag}'>
+			<dl>
+				<dt class="login">
+					<div class="avatar">
+						<img src="./images/avatar.png" alt="">
+					</div>
+					<span>登录</span>
+				</dt>
+				<dd class="active" ng-repeat='item in list'>
+					<a href="{{item.link}}/" class="{{item.icon}}" ng-click='toggle()'>
+						<span ng-cloak>{{item.text}}</span>
+					</a>
+				</dd> 
+			</dl>
+			<div class="extra">
+				<a href="javascript:;" class="icon-image">夜晚</a>
+				<a href="javascript:;" class="icon-download">离线</a>
+			</div>
+		</div>
+		<!-- //右边容器 -->
+		<div class="container" ng-class='{collapse:collapse,body:true}'>
+			<!-- 头部 -->
+			<div class="header">
+				<a href="javascript:;" class="menu icon-menu" ng-click='toggle()'></a>
+				<h2> {{title}}</h2>
+				<a href="javascript:;" class="search icon-search"></a>
+			</div>
+			<!-- 主体 -->
+			<div >
+				<div class="item">
+					<img src="images/loading.gif" alt="" style="width:32px; margin:0 auto" ng-hide='loading'>
+					<div ng-view></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

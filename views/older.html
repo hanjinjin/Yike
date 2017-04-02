@@ -1,0 +1,35 @@
+<div class="mark margins" ng-hide='!loading'>{{date|date:'ddMMM'}}</div>
+<ul class="posts large">
+    <!-- 文章
+         回来的文章数据分为三种类型
+                1：纯文字的文章 display_style 10001
+                2: 文字+图片的数据 display_style 10002
+                3: 纯图片的数据  display_style 10003
+    -->
+    <li ng-repeat="post in posts">
+        <span href="javascript:;" class="tag" ng-if="post.column.name"> {{post.column.name}}
+        </span>
+        <div class="cont">
+            <h3>{{post.title}}</h3>
+            <div class="brief">
+                <!--
+                      如果 display_style 10001 就没有图片.
+                    我就添加一个 only 样式.
+                -->
+                <p ng-class="{only:post.display_style==10001}"  ng-if="post.display_style!=10003">
+                        {{post.abstract}}
+                </p>
+                <!--图片+文字的-->
+                <div class="thumb"  ng-if="post.display_style==10002">
+                    <img  ng-src="{{post.thumbs[0].small.url}}" alt="">
+                </div>
+
+                 <!--纯图片的-->
+                <div class="gallery" ng-if="post.display_style==10003">
+                    <img ng-src="{{post.thumbs[0].small.url}}">
+                </div>
+            </div>
+        </div>
+    </li>
+
+</ul>
